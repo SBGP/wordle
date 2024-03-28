@@ -17,11 +17,11 @@ fn main() {
     let mut attempts = 6;
     let mut previous_guesses = Vec::new();
 
-    println!("welcome to wordle!");
-    println!("guess the 5-letter word. you have {} attempts.", attempts);
+    println!("Welcome to wordle!");
+    println!("Guess the 5-letter word. You have {} attempts.", attempts);
 
     while attempts > 0 {
-        print!("enter your guess: ");
+        print!("Enter your guess: ");
         io::stdout().flush().unwrap();
 
         let mut guess = String::new();
@@ -29,7 +29,7 @@ fn main() {
         let guess = guess.trim().to_lowercase();
 
         if guess.len() != 5 || !dictionary.contains(&guess) {
-            println!("{}", "please enter a valid 5-letter english word.".red());
+            println!("{}", "Please enter a valid 5-letter english word.".red());
             continue;
         }
 
@@ -54,23 +54,23 @@ fn main() {
 
         print!("{esc}[2J{esc}[1;1H", esc = 27 as char);
 
-        println!("welcome to wordle!");
-        println!("guess the 5-letter word. you have {} attempts.", attempts);
+        println!("Welcome to wordle!");
+        println!("Guess the 5-letter word. You have {} attempts.", attempts);
 
         for (guess, feedback) in &previous_guesses {
             println!("{} - {}", guess, feedback);
         }
 
         if guess == secret_word {
-            println!("{}", "congratulations, you've guessed the word!".green());
+            println!("{}", "Congratulations, you've guessed the word!".green());
             return;
         }
 
         attempts -= 1;
-        println!("attempts left: {}", attempts);
+        println!("Attempts left: {}", attempts);
     }
 
-    println!("{}", format!("the word was '{}'.", secret_word).red());
+    println!("{}", format!("The word was '{}'.", secret_word).red());
 }
 
 fn load_dictionary(path: &str) -> io::Result<HashSet<String>> {
